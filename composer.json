@@ -1,0 +1,23 @@
+{
+    "name": "bliep/mail",
+    "description": "Studio 100 - Bliep - Mail Driver",
+    "authors": [
+        {
+            "name": "Stijn Debakker",
+            "email": "stijn@quibax.com"
+        }
+    ],
+    "require": {
+      "php": ">=5.5.9",
+      "illuminate/container": "5.1.*",
+      "illuminate/contracts": "5.1.*",
+      "illuminate/support": "5.1.*",
+      "psr/log": "~1.0",
+      "swiftmailer/swiftmailer": "~5.1"
+    },
+    "autoload": {
+      "psr-4": {
+        "Bliep\\Mail\\": "src/"
+      }
+    }
+}
