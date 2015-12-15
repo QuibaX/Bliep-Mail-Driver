@@ -33,13 +33,21 @@ class BliepTransport extends Transport {
     {
         $client = new HttpClient();
 
+        $to = $message->getTo();
+        $to_array = [];
+
+        foreach($to as $email => $display)
+            array_push($to_array, $email);
+
         $data = [
             'apiKey' => $this->apiKey,
-            'to' => $message->getTo(),
+            'to' => implode(',', $to_array),
             'subject' => $message->getSubject(),
-            'from' => $message->getFrom(),
             'message' => $message->getBody()
         ];
+
+        if($message->getFrom() != null)
+            $data['from'] = $message->getFrom();
 
         if (version_compare(ClientInterface::VERSION, '6') === 1) {
             $options = ['form_params' => $data];
@@ -47,6 +55,6 @@ class BliepTransport extends Transport {
             $options = ['body' => $data];
         }
 
-        return $client->post($this->url, $options);
+        return $client->request('POST', $this->url, $options);
     }
 }

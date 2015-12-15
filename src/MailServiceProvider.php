@@ -20,7 +20,7 @@ class MailServiceProvider extends \Illuminate\Mail\MailServiceProvider {
 
         $this->app['swift.mailer'] = $this->app->share(function ($app) use ($bliep) {
             return new Swift_Mailer(
-                new BliepTransport($bliep['apiKey'], true)
+                new BliepTransport($bliep['apiKey'], $bliep['url'])
             );
         });
     }
